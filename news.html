@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CxBL | News & Updates</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div style="width:24px; height:24px; background:var(--primary); border-radius:50%;"></div>
+            CxBL
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="news.html" class="active">News and Updates</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-nav">Contact Us</a>
+    </nav>
+
+    <section class="container" style="padding-top: 100px; padding-bottom: 2rem;">
+        <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Lab Chronicles</h1>
+        <p style="color:var(--text-muted);">Latest breakthroughs, events, and announcements from CxBL.</p>
+    </section>
+
+    <div class="container">
+        
+        <div class="news-hero-grid">
+            
+            <div class="news-card-featured">
+                <span class="cat-tag cat-paper" style="background:white; color:var(--text-main);">Major Publication</span>
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Breakthrough in Ulvan Lyase Stability</h2>
+                <p style="color:rgba(255,255,255,0.8); margin-bottom: 1.5rem;">
+                    Our latest study, combining MD simulations with experimental mutagenesis, reveals a novel pathway to increase thermostability by 40%.
+                </p>
+                <a href="#" class="btn btn-primary" style="align-self: flex-start; background: white; color: var(--text-main);">Read Story</a>
+            </div>
+
+            <div class="news-card-side">
+                <span class="cat-tag cat-tool">New Software</span>
+                <h3>Boltz2-Notebook v1.0 Released</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem;">
+                    The open-source Colab interface for the Boltz-1 foundation model is now live.
+                </p>
+                <a href="tools.html" style="color:var(--primary); text-decoration:none; font-weight:600; margin-top:1rem; font-size:0.9rem;">Try it now &rarr;</a>
+            </div>
+
+            <div class="news-card-side">
+                <span class="cat-tag cat-event">Event</span>
+                <h3>Upcoming Talk: IEEE PUNECon</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem;">
+                    Dr. Tilewale will be presenting our work on high-throughput docking pipelines next month.
+                </p>
+                <a href="#" style="color:var(--primary); text-decoration:none; font-weight:600; margin-top:1rem; font-size:0.9rem;">Event Details &rarr;</a>
+            </div>
+
+        </div>
+
+        <div class="news-list-container">
+            <h3 class="section-title" style="border-left:none; padding-left:0; margin-bottom:1rem;">Archive</h3>
+            
+            <div class="news-list-item">
+                <div class="news-date-badge">
+                    <span class="news-day">15</span>
+                    <span class="news-month">Nov</span>
+                </div>
+                <div class="news-content">
+                    <span class="cat-tag cat-award">Award</span>
+                    <h3>Best Poster Award at Structural Biology 2025</h3>
+                    <p>Congratulations to our PhD scholar, Jane Doe, for winning the Best Poster award for her work on membrane protein dynamics.</p>
+                </div>
+            </div>
+
+            <div class="news-list-item">
+                <div class="news-date-badge">
+                    <span class="news-day">02</span>
+                    <span class="news-month">Oct</span>
+                </div>
+                <div class="news-content">
+                    <span class="cat-tag cat-paper">Preprint</span>
+                    <h3>New Preprint on BioRxiv</h3>
+                    <p>We have uploaded our manuscript describing "GRAVITy", our new graph-based analysis tool for residue interaction networks.</p>
+                </div>
+            </div>
+
+            <div class="news-list-item">
+                <div class="news-date-badge">
+                    <span class="news-day">20</span>
+                    <span class="news-month">Sep</span>
+                </div>
+                <div class="news-content">
+                    <span class="cat-tag cat-event">Lab Life</span>
+                    <h3>Welcome New Lab Members</h3>
+                    <p>CxBL is excited to welcome two new Masters students, Rahul and Sarah, who will be joining the enzyme engineering subgroup.</p>
+                </div>
+            </div>
+
+            <div class="news-list-item">
+                <div class="news-date-badge">
+                    <span class="news-day">05</span>
+                    <span class="news-month">Aug</span>
+                </div>
+                <div class="news-content">
+                    <span class="cat-tag cat-tool">Update</span>
+                    <h3>UniDock GUI Maintenance</h3>
+                    <p>The UniDock server will be undergoing maintenance on August 10th for GPU upgrades. Please save your work.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="newsletter-box">
+            <h2 style="font-size:2rem; margin-bottom:0.5rem;">Stay in the Loop</h2>
+            <p style="color:rgba(255,255,255,0.7);">Subscribe to our quarterly newsletter for tool updates and research highlights.</p>
+            <form class="newsletter-form">
+                <input type="email" class="news-input" placeholder="Enter your email address...">
+                <button type="button" class="btn btn-primary" style="border-radius:50px;">Subscribe</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer style="margin-top: 5rem; background: white; border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; color: var(--text-muted);">
+        <p>&copy; 2025 CxBL Lab. University Science Block.</p>
+    </footer>
+
+</body>
+</html>

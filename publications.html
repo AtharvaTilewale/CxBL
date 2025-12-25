@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CxBL | Publications</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div style="width:24px; height:24px; background:var(--primary); border-radius:50%;"></div>
+            CxBL
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="publications.html" class="active">Publications</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="news.html">News and Updates</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-nav">Contact Us</a>
+    </nav>
+
+    <section class="container" style="padding-top: 100px; padding-bottom: 2rem; text-align: center;">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">Research Output</h1>
+        <p style="color:var(--text-muted); max-width: 600px; margin: 0 auto;">
+            Our latest contributions to computational biology and protein engineering.
+        </p>
+    </section>
+
+    <div class="container">
+
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" data-target="18">0</div>
+                <div class="stat-label">Publications</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="839">0</div>
+                <div class="stat-label">Citations</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="18">0</div>
+                <div class="stat-label">H-Index</div>
+            </div>
+        </div>
+
+        <div class="search-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="pubSearch" class="search-input" placeholder="Search by title, author, or year..." onkeyup="filterPubs()">
+        </div>
+
+        <div id="pub-list">
+
+            <div class="pub-card" data-category="enzyme">
+                <div class="pub-visual">
+                    <img src="https://via.placeholder.com/150/e2e8f0/0f172a?text=Ulvan+Lyase" alt="Abstract">
+                </div>
+                <div class="pub-content">
+                    <div class="pub-meta">
+                        <span class="pub-year">2025</span>
+                        <span class="pub-journal">Biomolecules (Under Review)</span>
+                    </div>
+                    <h3 class="pub-title">In Silico Engineering of Ulvan Lyase for Improved Thermostability: A Molecular Dynamics Approach</h3>
+                    <p class="pub-authors">
+                        <strong>A. Tilewale</strong>, J. Doe, R. Sharma, & P. Investigator
+                    </p>
+                    <div class="pub-actions">
+                        <a href="#" class="action-link pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <a href="#" class="action-link"><i class="fas fa-external-link-alt"></i> DOI</a>
+                        <button class="action-link" onclick="copyCite(this, '@article{tilewale2025ulvan, title={In Silico Engineering...}, author={Tilewale, A}, year={2025}}')">
+                            <i class="fas fa-quote-right"></i> Cite
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-category="tool">
+                <div class="pub-visual">
+                    <img src="https://via.placeholder.com/150/e2e8f0/0369a1?text=UniDock+GUI" alt="Abstract">
+                </div>
+                <div class="pub-content">
+                    <div class="pub-meta">
+                        <span class="pub-year">2025</span>
+                        <span class="pub-journal">IEEE PUNECon 2025 (Accepted)</span>
+                    </div>
+                    <h3 class="pub-title">UniDock GUI: An Open-Source Interface for High-Throughput Molecular Docking Workflows</h3>
+                    <p class="pub-authors">
+                         R. Sharma, <strong>A. Tilewale</strong>, & E. Chen
+                    </p>
+                    <div class="pub-actions">
+                        <a href="#" class="action-link pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <a href="#" class="action-link"><i class="fab fa-github"></i> Code</a>
+                        <button class="action-link" onclick="copyCite(this, '@inproceedings{sharma2025unidock, title={UniDock GUI...}, author={Sharma, R}, year={2025}}')">
+                            <i class="fas fa-quote-right"></i> Cite
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-card" data-category="md">
+                <div class="pub-visual">
+                    <img src="https://via.placeholder.com/150/e2e8f0/7c3aed?text=Lipid+Dyn" alt="Abstract">
+                </div>
+                <div class="pub-content">
+                    <div class="pub-meta">
+                        <span class="pub-year">2024</span>
+                        <span class="pub-journal">J. Chem. Inf. Model.</span>
+                    </div>
+                    <h3 class="pub-title">Structural Insights into Membrane Protein Dynamics using GROMACS and MM-GBSA Analysis</h3>
+                    <p class="pub-authors">
+                        S. Jenkins, <strong>A. Tilewale</strong>, & P. Investigator
+                    </p>
+                    <div class="pub-actions">
+                        <a href="#" class="action-link pdf"><i class="fas fa-file-pdf"></i> PDF</a>
+                        <a href="#" class="action-link"><i class="fas fa-external-link-alt"></i> DOI</a>
+                        <button class="action-link" onclick="copyCite(this, '@article{jenkins2024structural, title={Structural Insights...}, author={Jenkins, S}, year={2024}}')">
+                            <i class="fas fa-quote-right"></i> Cite
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer style="margin-top: 5rem;">
+        <p>&copy; 2025 CxBL Lab. Gujarat Biotechnology University.</p>
+    </footer>
+
+    <script>
+        // 1. Stats Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / 50; // Speed
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(updateCount, 40);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+
+        // 2. Search / Filter Logic
+        function filterPubs() {
+            const input = document.getElementById('pubSearch');
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementsByClassName('pub-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let text = cards[i].textContent || cards[i].innerText;
+                if (text.toLowerCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // 3. Copy Citation to Clipboard
+        function copyCite(btn, bibtex) {
+            navigator.clipboard.writeText(bibtex).then(() => {
+                const originalHTML = btn.innerHTML;
+                
+                // Change to success state
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.style.color = '#15803d'; // Green color
+
+                // Revert after 2 seconds
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.color = ''; // Revert color
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

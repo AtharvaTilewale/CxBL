@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CxBL | Computational & Experimental Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div style="width:24px; height:24px; background:var(--primary); border-radius:50%;"></div>
+            CxBL
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="news.html">News and Updates</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-nav">Contact Us</a>
+    </nav>
+
+    <header class="hero-fullscreen">
+        
+        <div class="hero-bg-split">
+            <div class="bg-side left-side">
+                <canvas id="canvas-comp"></canvas>
+            </div>
+            <div class="bg-side right-side">
+                <canvas id="canvas-exp"></canvas>
+            </div>
+        </div>
+
+        <canvas id="dna-canvas"></canvas>
+        
+        <div class="laptop-wrapper animate-up">
+            <div class="laptop-lid">
+                <div class="laptop-camera"></div> 
+                <div class="laptop-screen">
+                    
+                    <div class="screen-top">
+                        <div class="hero-badge">
+                            <i class="fas fa-flask"></i> Welcome to CxBL Lab
+                        </div>
+                        <h1>Computational and Experimental <br> <span class="text-highlight">Biomolecular Lab<Label></Label></span></h1>
+                    </div>
+
+                    <div class="analysis-window">
+                        <div class="scan-line"></div>
+                        <div class="hud-grid"></div>
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+
+                        <div class="analysis-data-container">
+                            <div class="data-item">
+                                <div class="data-label">SEQ_ALIGN</div>
+                                <div class="data-value" id="seq-counter">0.0%</div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" id="seq-fill"></div>
+                                </div>
+                            </div>
+
+                            <div class="data-item">
+                                <div class="data-label">RMSD (Å)</div>
+                                <div class="data-value highlight" id="rmsd-counter">0.000</div>
+                                <div class="mini-graph">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-status">
+                            <span class="blink-dot"></span> PROCESSING GENOME...
+                        </div>
+                    </div>
+
+                    <div class="screen-bottom">
+                        <a href="#next-section" class="explore-btn">
+                            Explore Lab <i class="fas fa-arrow-down"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="laptop-base"></div>
+        </div>
+
+    </header>
+
+    <section id="next-section" class="container" style="position: relative; z-index: 2;">
+        <div class="section-header-center">
+            <h2>The CxBL Workflow</h2>
+            <p>From <em>in silico</em> prediction to <em>in vitro</em> reality.</p>
+        </div>
+        
+        <div class="grid-3">
+             <div class="feature-card">
+                <div class="f-icon-box" style="background: rgba(3, 105, 161, 0.1); color: var(--primary);">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3>Computational Design</h3>
+                <p>Leveraging GROMACS, Rosetta, and AI models like AlphaFold to predict protein structures and dynamics with atomic precision.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="f-icon-box" style="background: rgba(124, 58, 237, 0.1); color: var(--secondary);">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3>Experimental Validation</h3>
+                <p>Cloning, expression, and purification of designed variants to validate stability and catalytic efficiency in the wet lab.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="f-icon-box" style="background: rgba(5, 150, 105, 0.1); color: #059669;">
+                    <i class="fas fa-terminal"></i>
+                </div>
+                <h3>Tool Development</h3>
+                <p>Building open-source Python tools and GUIs (like UniDock & FEL Builder) to democratize complex bioinformatics workflows.</p>
+            </div>
+        </div>
+    </section>
+    <section style="background: white; padding: 6rem 0; border-top: 1px solid var(--border);">
+        <div class="container" style="display: flex; align-items: center; gap: 4rem; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 300px;">
+                <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                     alt="Lab Work" 
+                     style="width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg);">
+            </div>
+            <div style="flex: 1; min-width: 300px;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Decoding Life's Code</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">
+                    At CxBL, we believe the future of biology is programmable. Our interdisciplinary team combines the speed of silicon with the complexity of carbon to solve challenges in enzyme thermostability and drug discovery.
+                </p>
+                
+                <div class="stat-row">
+                    <div>
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--primary);">15+</span>
+                        <span style="display:block; font-size: 0.8rem; text-transform: uppercase; font-weight: 600; color: var(--text-muted);">Tools Built</span>
+                    </div>
+                    <div style="width: 1px; height: 50px; background: var(--border);"></div>
+                    <div>
+                        <span style="font-size: 2rem; font-weight: 800; color: var(--secondary);">20+</span>
+                        <span style="display:block; font-size: 0.8rem; text-transform: uppercase; font-weight: 600; color: var(--text-muted);">Publications</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 CxBL Lab. Gujarat Biotechnology University.</p>
+    </footer>
+<script>
+        // --- 1. NAVIGATION SCROLL LOGIC ---
+        const nav = document.querySelector('nav');
+        const heroSection = document.querySelector('.hero-fullscreen');
+
+        function handleScroll() {
+            // Calculate where the hero section ends
+            const heroBottom = heroSection.offsetHeight - 100; // 100px buffer
+            
+            if (window.scrollY > heroBottom) {
+                nav.classList.add('nav-visible');
+            } else {
+                nav.classList.remove('nav-visible');
+            }
+        }
+        
+        window.addEventListener('scroll', handleScroll);
+
+
+        // --- 2. EXISTING ANIMATION LOGIC (Merged) ---
+        const cComp = document.getElementById('canvas-comp');
+        const ctxComp = cComp.getContext('2d');
+        const cExp = document.getElementById('canvas-exp');
+        const ctxExp = cExp.getContext('2d');
+        const canvasDNA = document.getElementById('dna-canvas');
+        const ctxDNA = canvasDNA.getContext('2d');
+
+        let wComp, hComp, wExp, hExp, wDNA, hDNA;
+        
+        const fontSize = 14; 
+        const matrixChars = ['0', '1', 'A', 'T', 'G', 'C', 'MET', 'LYS', 'ARG', 'HIS', 'TRP'];
+        let drops = [], dropChars = [], bubbles = [], particles = [];
+        let time = 0;
+
+        const dnaConfig = { basePairs: 150, speed: 0.02, amplitude: 70, frequency: 0.15, tilt: 0.15};
+
+        // ... (Keep your existing initMatrix, drawMatrix, Bubble class, initBubbles, drawBubbles, Particle class, initDNA, drawDNA functions EXACTLY as they were in the previous step) ...
+        
+        // RE-INSERTING THE FUNCTIONS FOR COMPLETENESS:
+        function initMatrix() {
+            const columns = Math.ceil(wComp / (fontSize * 2));
+            drops = []; dropChars = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = Math.random() * hComp; 
+                dropChars[x] = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+            }
+        }
+        function drawMatrix() {
+            ctxComp.fillStyle = 'rgb(67, 56, 120)'; ctxComp.fillRect(0, 0, wComp, hComp);
+            ctxComp.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                const text = dropChars[i];
+                if (text === '0' || text === '1') ctxComp.fillStyle = 'rgba(148, 163, 184, 0.3)';
+                else if (['A','T','G','C'].includes(text)) ctxComp.fillStyle = 'rgba(56, 189, 248, 0.3)';
+                else ctxComp.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctxComp.fillText(text, i * (fontSize * 2), drops[i]);
+                if (drops[i] > hComp && Math.random() > 0.98) {
+                    drops[i] = 0;
+                    dropChars[i] = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                }
+                drops[i] += 1.5; 
+            }
+        }
+
+        class Bubble {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * wExp;
+                this.y = hExp + Math.random() * 100;
+                this.size = Math.random() * 10 + 2; 
+                this.speed = Math.random() * 1 + 0.5;
+                this.color = `rgba(124, 58, 237, ${Math.random() * 0.2 + 0.1})`; 
+                this.isHex = Math.random() > 0.7; 
+            }
+            update() {
+                this.y -= this.speed;
+                this.x += Math.sin(this.y * 0.02) * 0.5; 
+                if(this.y < -20) this.reset();
+            }
+            draw() {
+                ctxExp.beginPath();
+                if (this.isHex) {
+                    const s = this.size;
+                    ctxExp.moveTo(this.x + s * Math.cos(0), this.y + s * Math.sin(0));
+                    for (let i = 1; i <= 6; i += 1) ctxExp.lineTo(this.x + s * Math.cos(i * 2 * Math.PI / 6), this.y + s * Math.sin(i * 2 * Math.PI / 6));
+                    ctxExp.strokeStyle = this.color; ctxExp.lineWidth = 2; ctxExp.stroke();
+                } else {
+                    ctxExp.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                    ctxExp.fillStyle = this.color; ctxExp.fill();
+                }
+            }
+        }
+        function initBubbles() { bubbles = []; for(let i=0; i<40; i++) bubbles.push(new Bubble()); }
+        function drawBubbles() { ctxExp.clearRect(0, 0, wExp, hExp); bubbles.forEach(b => { b.update(); b.draw(); }); }
+
+        class Particle {
+            constructor(x, y, type, index) {
+                this.xBase = x; this.yBase = y; this.type = type; this.index = index; this.size = 0; this.alpha = 0;
+            }
+            update() {
+                const phase = this.type === 0 ? 0 : Math.PI; 
+                const offset = (this.index * dnaConfig.frequency) + time + phase;
+                const depth = Math.cos(offset); 
+                const yOffset = Math.sin(offset) * dnaConfig.amplitude;
+                const tiltOffset = this.index * 10 * dnaConfig.tilt;
+                this.currentX = this.xBase; this.currentY = this.yBase + yOffset + tiltOffset;
+                this.size = 3 + (depth * 1.5); this.alpha = 0.3 + ((depth + 1) / 2) * 0.7; this.depth = depth; 
+            }
+            draw() {
+                ctxDNA.beginPath(); ctxDNA.arc(this.currentX, this.currentY, this.size, 0, Math.PI * 2);
+                const isLeftSide = this.currentX < wDNA / 2;
+                if (isLeftSide) {
+                    if (this.type === 0) ctxDNA.fillStyle = `rgb(251 205 251)`; 
+                    else ctxDNA.fillStyle = `rgb(154 136 237)`; 
+                } else {
+                    if (this.type === 0) ctxDNA.fillStyle = `rgba(3, 105, 161, ${this.alpha})`; 
+                    else ctxDNA.fillStyle = `rgba(124, 58, 237, ${this.alpha})`; 
+                }
+                ctxDNA.fill();
+            }
+        }
+        function initDNA() {
+            particles = []; const startX = -100; const endX = wDNA + 100; const step = (endX - startX) / dnaConfig.basePairs;
+            for (let i = 0; i < dnaConfig.basePairs; i++) {
+                const x = startX + (i * step); const y = (hDNA / 2) - 100;
+                particles.push(new Particle(x, y, 0, i)); particles.push(new Particle(x, y, 1, i));
+            }
+        }
+        function drawDNA() {
+            ctxDNA.clearRect(0, 0, wDNA, hDNA); time += dnaConfig.speed;
+            particles.forEach(p => p.update());
+            for (let i = 0; i < particles.length; i += 2) {
+                const p1 = particles[i]; const p2 = particles[i+1]; 
+                ctxDNA.beginPath(); ctxDNA.moveTo(p1.currentX, p1.currentY); ctxDNA.lineTo(p2.currentX, p2.currentY);
+                const depthAvg = (p1.depth + p2.depth) / 2;
+                const midX = (p1.currentX + p2.currentX) / 2;
+                const isLeft = midX < wDNA / 2;
+                const lineAlpha = 0.1 + ((depthAvg + 1) / 2) * 0.2;
+                if (isLeft) ctxDNA.strokeStyle = `rgba(203, 213, 225, ${lineAlpha})`; 
+                else ctxDNA.strokeStyle = `rgba(71, 85, 105, ${lineAlpha})`;
+                ctxDNA.lineWidth = 1; ctxDNA.stroke();
+            }
+            particles.forEach(p => p.draw());
+        }
+
+        function resizeAll() {
+            wComp = cComp.width = window.innerWidth / 2; hComp = cComp.height = window.innerHeight;
+            wExp = cExp.width = window.innerWidth / 2; hExp = cExp.height = window.innerHeight;
+            wDNA = canvasDNA.width = window.innerWidth; hDNA = canvasDNA.height = window.innerHeight;
+            initMatrix(); initBubbles(); initDNA();
+        }
+        function animateMaster() { drawMatrix(); drawBubbles(); drawDNA(); requestAnimationFrame(animateMaster); }
+        
+        // Laptop HUD Logic
+        const seqElement = document.getElementById('seq-counter');
+        const seqFill = document.getElementById('seq-fill');
+        let seqValue = 0; const targetSeq = 98.4;
+        function animateSeq() {
+            if (seqValue < targetSeq) {
+                const diff = targetSeq - seqValue; seqValue += diff * 0.05; 
+                if (seqValue > targetSeq - 0.1) seqValue = targetSeq;
+                if(seqElement) { seqElement.innerText = seqValue.toFixed(1) + '%'; seqFill.style.width = seqValue + '%'; }
+                requestAnimationFrame(animateSeq);
+            }
+        }
+        const rmsdElement = document.getElementById('rmsd-counter');
+        setInterval(() => {
+            if(rmsdElement) {
+                const randomRMSD = (Math.random() * (0.160 - 0.130) + 0.130).toFixed(3);
+                rmsdElement.innerText = randomRMSD;
+            }
+        }, 1500);
+
+        window.addEventListener('resize', resizeAll);
+        resizeAll();
+        animateMaster();
+        setTimeout(animateSeq, 500);
+    </script></body>
+</html>

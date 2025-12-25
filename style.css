@@ -1,0 +1,2093 @@
+/* style.css - v2 Light Theme Fullscreen Hero */
+:root {
+    --bg-color: #f8fafc; /* Slate 50 */
+    --surface-color: #ffffff;
+    /* Adjusted primary for better contrast on light bg */
+    --primary: #0369a1; /* Sky 700 */
+    --secondary: #7c3aed; /* Violet 600 */
+    --text-main: #0f172a; /* Slate 900 */
+    --text-muted: #475569; /* Slate 600 */
+    --border: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth; /* Ensures clicking the button scrolls smoothly */
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    /* The static base pattern */
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* --- Navigation --- */
+/* --- Navigation (Updated for Scroll Effect) --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    z-index: 1000;
+    
+    /* NEW: Hide initially */
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Class to reveal nav */
+nav.nav-visible {
+    transform: translateY(0);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links { list-style: none; display: flex; gap: 2rem; }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-nav {
+    background: var(--primary);
+    color: white;
+}
+.btn-nav:hover { box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3); }
+
+
+/* =========================
+   NEW FULLSCREEN HERO STYLES
+   ========================= */
+
+/* =========================
+   UPDATED HERO WITH SPLIT BG
+   ========================= */
+
+/* --- Hero Fullscreen (Cleaned up) --- */
+.hero-fullscreen {
+    position: relative;
+    height: 100vh; /* Pure full height */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    
+    /* REMOVED the old negative margins/padding */
+    margin-top: 0; 
+    padding-top: 0;
+}
+
+/* Background Split Container */
+.hero-bg-split {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 0; /* Behind laptop */
+}
+
+.bg-side {
+    flex: 1; /* 50% width each */
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Specific colors to match lab theme */
+.left-side {
+    background: #f8fafc; /* Very light slate for code visibility */
+    border-right: 1px solid rgba(0,0,0,0.05);
+}
+
+.right-side {
+    background: rgb(255 225 255 / 50%); /* Very light violet tint */
+}
+
+/* Ensure canvas fills the side */
+.hero-bg-split canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+
+/* Ensure Laptop stays above the background */
+.laptop-wrapper {
+    /* Existing styles... */
+    z-index: 2; 
+    position: relative;
+    /* Optional: Add a stronger shadow to separate it from the busy background */
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+}
+
+/* The canvas for particles sits behind the content */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* The text container sits above the canvas */
+.hero-center-content {
+    z-index: 2;
+    position: relative;
+    max-width: 800px;
+    padding: 2rem;
+    /* Optional: adds a subtle frosted glass effect behind text for readability */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.hero-center-content h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+.text-highlight {
+    color: var(--primary);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 3rem;
+}
+
+/* The Explore Button */
+.explore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 2.5rem;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(3, 105, 161, 0.4);
+}
+
+.explore-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(3, 105, 161, 0.6);
+    background: #0284c7; /* Slightly lighter on hover */
+}
+
+/* Arrow Animation */
+@keyframes bounceDown {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(8px); }
+    60% { transform: translateY(4px); }
+}
+
+.bounce-icon {
+    animation: bounceDown 2s infinite;
+}
+
+/* Section divider to scroll to */
+#next-section-marker {
+    height: 1px;
+    visibility: hidden;
+}
+
+
+/* --- General Sections --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+.card h3 { margin-bottom: 0.5rem; color: var(--text-main); }
+
+/* --- Footer --- */
+footer {
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--text-muted);
+}
+/* =========================================
+   LAPTOP HERO DESIGN
+   ========================================= */
+
+.laptop-wrapper {
+    position: relative;
+    max-width: 850px; /* Width of the laptop */
+    width: 90%;
+    margin: 0 auto;
+    z-index: 2; /* Ensure it sits above the DNA canvas */
+}
+
+/* 1. The Lid (Dark Bezel) */
+.laptop-lid {
+    background: #1e293b; /* Slate 800 - Dark Bezel Color */
+    padding: 12px 12px 0 12px; /* Margins for the bezel */
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25); /* Deep shadow behind laptop */
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+/* Subtle lift on hover */
+.laptop-lid:hover {
+    transform: translateY(-5px); 
+}
+
+/* 2. The Webcam Dot */
+.laptop-camera {
+    width: 8px;
+    height: 8px;
+    background: #475569;
+    border-radius: 50%;
+    margin: 0 auto 8px auto; /* Centered in top bezel */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* 3. The Screen (Frosted Glass Content Area) */
+.laptop-screen {
+    background: rgba(255, 255, 255, 0.95); /* High opacity for readability */
+    /* Subtle gradient to mimic screen glow */
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%);
+    backdrop-filter: blur(5px);
+    border-radius: 8px 8px 0 0; /* Matches inside of bezel */
+    padding: 3.5rem 2rem;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Optional: Scanline effect for high-tech feel */
+.laptop-screen::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.03) 0px,
+        rgba(0, 0, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure content is above scanlines */
+.laptop-screen > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 4. The Laptop Base */
+.laptop-base {
+    height: 18px;
+    background: #aeb6bf; /* Slate 300 - Silver Base */
+    border-top: 2px solid #8e96a2; /* Shadow/Hinge definition */
+    border-radius: 0 0 16px 16px;
+    position: relative;
+    width: 106%; /* Base is slightly wider than lid */
+    left: -3%; /* Centers the wider base */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Thumb notch for opening laptop */
+.laptop-base::after {
+    content: '';
+    display: block;
+    width: 15%;
+    height: 4px;
+    background: #94a3b8;
+    margin: 0 auto;
+    border-radius: 0 0 4px 4px;
+    opacity: 0.5;
+}
+
+/* Adjustments for Mobile */
+@media (max-width: 768px) {
+    .laptop-screen {
+        padding: 2rem 1rem;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    .laptop-wrapper {
+        width: 95%;
+    }
+    .laptop-base {
+        width: 100%; /* Align width on mobile to prevent overflow */
+        left: 0;
+    }
+}
+/* =========================================
+   LAPTOP HUD & ANALYSIS ANIMATIONS
+   ========================================= */
+
+/* Ensure the screen positions elements correctly */
+/* =========================================
+   UPDATED LAPTOP LAYOUT
+   ========================================= */
+
+.laptop-screen {
+    /* Use Flexbox to stack items vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spacing between Top, Middle, Bottom */
+    align-items: center;
+    padding: 2.5rem 2rem; /* Adjusted padding */
+}
+
+/* 1. TOP SECTION */
+.screen-top {
+    flex: 0 0 auto;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+.screen-top h1 {
+    font-size: 2.5rem; /* Slightly smaller to fit everything */
+    margin-bottom: 0;
+}
+
+/* 2. MIDDLE: ANALYSIS WINDOW */
+.analysis-window {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Constrain width */
+    height: 140px;    /* Fixed height for the "viewport" */
+    background: rgba(15, 23, 42, 0.03); /* Very subtle dark tint */
+    border: 1px solid rgba(56, 189, 248, 0.3); /* Blue border */
+    border-radius: 8px;
+    overflow: hidden; /* Keeps scan line inside */
+    margin-bottom: 1.5rem;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* Re-use existing scan-line and grid styles, but ensure they are inside .analysis-window */
+.scan-line {
+    /* (Keep your existing animation) */
+    z-index: 1;
+}
+
+.hud-grid {
+    opacity: 0.5;
+}
+
+/* Data Layout inside Window */
+.analysis-data-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.data-item {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.data-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.data-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+.data-value.highlight { color: var(--primary); }
+
+/* Progress Track */
+.progress-track {
+    width: 100px;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    margin: 5px auto 0;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 0%; /* JS will animate this */
+}
+
+/* Mini Graph Bars */
+.mini-graph {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    height: 10px;
+    margin-top: 5px;
+    align-items: flex-end;
+}
+.mini-graph span {
+    width: 4px;
+    background: var(--secondary);
+    animation: graphBounce 0.8s infinite alternate;
+}
+.mini-graph span:nth-child(2) { animation-delay: 0.2s; }
+.mini-graph span:nth-child(3) { animation-delay: 0.4s; }
+.mini-graph span:nth-child(4) { animation-delay: 0.1s; }
+
+@keyframes graphBounce { to { height: 100%; opacity: 0.5; } from { height: 20%; opacity: 1; } }
+
+/* Status Footer */
+.analysis-status {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    font-size: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--primary);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.blink-dot {
+    width: 6px; height: 6px; background: var(--primary); border-radius: 50%;
+    animation: blink 1s infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* 3. BOTTOM SECTION */
+.screen-bottom {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .analysis-window {
+        height: 120px;
+        max-width: 100%;
+    }
+    .data-value { font-size: 1.4rem; }
+    .screen-top h1 { font-size: 1.8rem; }
+}
+/* =========================================
+   NEW HOME PAGE STYLES (DNA THEME)
+   ========================================= */
+
+/* Hero Adjustments */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(3, 105, 161, 0.2);
+}
+
+/* Secondary Outline Button for Hero */
+.btn-outline-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem 2rem;
+    border: 2px solid var(--text-main);
+    color: var(--text-main);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-outline-hero:hover {
+    background: var(--text-main);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Scroll Mouse Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.6;
+}
+
+.mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid var(--text-muted);
+    border-radius: 20px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    animation: scrollMouse 2s infinite;
+}
+
+@keyframes scrollMouse {
+    0% { top: 6px; opacity: 1; }
+    100% { top: 20px; opacity: 0; }
+}
+
+/* Feature Cards Redesign */
+.section-header-center {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header-center h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-header-center p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.feature-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect: Simple Lift and Border */
+.feature-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.f-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Stats Row */
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Canvas Positioning */
+#dna-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    /* Optional: Slight blur on edges of canvas if needed, but usually crisp is better for science */
+}
+
+/* Adjust hero content to sit nicely over the canvas */
+.hero-center-content {
+    background: rgba(255, 255, 255, 0.85); /* Increased opacity for readability */
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+/* Subtle Animation for text entry */
+.animate-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+/* --- New Member Page Styles (Add to style.css) --- */
+
+/* Section Titles with Accent Line */
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.section-title span {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 1rem;
+    background: #e2e8f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* 1. PI Section - Horizontal Layout */
+.pi-card {
+    display: flex;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    margin-bottom: 4rem;
+    align-items: stretch;
+    margin-bottom: 200px;
+}
+
+.pi-image-container {
+    flex: 0 0 350px; /* Fixed width for image */
+    position: relative;
+}
+
+/* --- Replace existing .pi-image-container img block --- */
+.pi-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+/* --- Add this new rule below it --- */
+.pi-card:hover .pi-image-container img {
+    filter: grayscale(0%);
+    transform: scale(1.02); /* Subtle zoom for PI too */
+}
+
+.pi-content {
+    flex: 1;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pi-role {
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.pi-name {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.pi-bio {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+/* 2. Current Members - Grid Layout */
+/* =========================================
+   NEW 3D FLIP CARD MEMBER STYLES
+   ========================================= */
+
+/* 1. Grid Layout */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 2.5rem;
+    row-gap: 3.5rem;/* Increased spacing for better readability */
+    margin-bottom: 4rem;
+}
+
+/* 2. Role Colors */
+:root {
+    --role-comp: #0369a1; /* Sky Blue (Same as Primary) */
+    --role-exp: #7c3aed;  /* Violet (Same as Secondary) */
+    --role-hybrid: #059669; /* Emerald Green for Hybrid */
+}
+
+/* 3. Main Card Container (The Stage) */
+.member-card-container {
+    background-color: transparent;
+    width: 100%;
+    height: 450px; /* Fixed height ensures uniform grid */
+    perspective: 1000px; /* Essential for 3D effect */
+}
+
+/* 4. The Inner Flipper */
+.member-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+}
+
+/* Hover Effect: Trigger Flip */
+.member-card-container:hover .member-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* 5. Common Styles for Front and Back */
+.member-card-front, .member-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--border);
+}
+
+/* ================= FRONT SIDE ================= */
+.member-card-front {
+    display: flex;
+    flex-direction: column;
+}
+
+.front-img-box {
+    height: 65%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    filter: grayscale(1);
+}
+
+.front-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* REMOVED GRAYSCALE as requested */
+    transition: transform 0.5s ease;
+}
+
+.member-card-container:hover .front-img-box img {
+    transform: scale(1.1);
+}
+
+/* Role Icon Badge on Front Image */
+.role-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+    z-index: 2;
+}
+
+.front-content {
+    padding: 1rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    background: white;
+}
+
+.front-designation {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-top: 1.5rem;
+}
+
+.front-name {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    color: var(--text-main);
+    line-height: 1.2;
+}
+
+/* Unique Keyword Style: Glassmorphic Pills */
+.keyword-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+}
+
+.keyword-pill {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+}
+
+/* ================= BACK SIDE (FLIPPED) ================= */
+.member-card-back {
+    transform: rotateY(180deg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc; /* Slight gray for contrast */
+}
+
+/* Specific Border Colors for Back based on Role */
+.type-comp .member-card-back { border: 2px solid var(--role-comp); }
+.type-exp .member-card-back { border: 2px solid var(--role-exp); }
+.type-hybrid .member-card-back { border: 2px solid var(--role-hybrid); }
+
+/* Small Circle Image */
+.back-img-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.back-img-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.back-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.back-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+/* Social Links Row */
+.back-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: auto; /* Pushes to bottom */
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: white;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.social-icon:hover {
+    color: white;
+    transform: translateY(-3px);
+    border-color: transparent;
+}
+
+/* ================= ROLE SPECIFIC COLORING ================= */
+
+/* Computational */
+.type-comp .role-badge { color: var(--role-comp); }
+.type-comp .front-designation { color: var(--role-comp); }
+.type-comp .keyword-pill { color: var(--role-comp); background: rgba(3, 105, 161, 0.1); }
+.type-comp .social-icon:hover { background: var(--role-comp); }
+
+/* Experimental */
+.type-exp .role-badge { color: var(--role-exp); }
+.type-exp .front-designation { color: var(--role-exp); }
+.type-exp .keyword-pill { color: var(--role-exp); background: rgba(124, 58, 237, 0.1); }
+.type-exp .social-icon:hover { background: var(--role-exp); }
+
+/* Hybrid */
+.type-hybrid .role-badge { color: var(--role-hybrid); }
+.type-hybrid .front-designation { color: var(--role-hybrid); }
+.type-hybrid .keyword-pill { color: var(--role-hybrid); background: rgba(5, 150, 105, 0.1); }
+.type-hybrid .social-icon:hover { background: var(--role-hybrid); }
+
+/* 3. Alumni - Compact Grid */
+.alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.alumni-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+/* --- Replace existing .alumni-avatar block --- */
+.alumni-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e2e8f0;
+    /* Added grayscale and transition */
+    transition: filter 0.3s ease;
+}
+
+/* --- Add this new rule below it --- */
+.alumni-card:hover .alumni-avatar {
+    filter: grayscale(0%);
+}
+
+.alumni-details h4 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.alumni-details p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .pi-card {
+        flex-direction: column;
+    }
+    .pi-image-container {
+        flex: none;
+        height: 300px;
+    }
+    .pi-content {
+        padding: 2rem;
+    }
+}
+
+/* --- Tools Page Specific Styles --- */
+
+/* 1. Filter Bar */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
+}
+
+/* 2. Spotlight Section (Featured Tool) */
+.spotlight-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Dark theme for contrast */
+    border-radius: 20px;
+    color: white;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative circle behind spotlight */
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+}
+
+.spotlight-content { flex: 1; z-index: 2; }
+.spotlight-visual { 
+    flex: 1; 
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    color: #38bdf8;
+    z-index: 2;
+}
+
+/* 3. The Tech Card */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.tech-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Hover Lift */
+.tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+.tech-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.tech-icon {
+    width: 48px;
+    height: 48px;
+    background: #f0f9ff;
+    color: var(--primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* Terminal Command Block */
+.cmd-block {
+    background: #1e293b;
+    border-radius: 6px;
+    padding: 0.8rem;
+    margin-top: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #334155;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cmd-block:hover {
+    background: #334155;
+}
+
+.cmd-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+
+.cmd-text::before {
+    content: '$ ';
+    color: #38bdf8; /* Cyan prompt */
+}
+
+.copy-icon {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Language Badge */
+.lang-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+.lang-python { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
+.lang-web { background: #eff6ff; color: #1d4ed8; border: 1px solid #dbeafe; }
+.lang-shell { background: #f0fdf4; color: #15803d; border: 1px solid #dcfce7; }
+
+/* Animation for filtering */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@media (max-width: 768px) {
+    .spotlight-card { flex-direction: column; text-align: center; padding: 2rem; }
+    .spotlight-visual { width: 100%; height: 200px; }
+}
+
+/* --- Publications Page Styles --- */
+
+/* 1. Stats Dashboard */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-item {
+    text-align: center;
+    position: relative;
+}
+
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: #e2e8f0;
+    display: none; /* Hidden on mobile */
+}
+@media(min-width: 768px) { .stat-item:not(:last-child)::after { display: block; } }
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* 2. Publication Card */
+.pub-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    transition: all 0.3s ease;
+}
+
+.pub-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.pub-visual {
+    flex: 0 0 150px;
+    height: 150px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+}
+
+.pub-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.pub-card:hover .pub-visual img {
+    transform: scale(1.1);
+}
+
+.pub-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pub-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+}
+
+.pub-year {
+    background: var(--text-main);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.pub-journal {
+    color: var(--primary);
+    font-weight: 600;
+    font-style: italic;
+}
+
+.pub-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.pub-authors {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Highlight the lab member's name */
+.pub-authors strong {
+    color: var(--text-main);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+}
+
+.pub-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 1rem;
+}
+
+.action-link {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.action-link:hover { color: var(--primary); }
+.action-link.pdf:hover { color: #ef4444; } /* Red for PDF */
+
+/* Search Bar */
+.search-wrapper {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto 3rem auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.3s;
+    padding-left: 3rem;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(3, 105, 161, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+    .pub-card { flex-direction: column; }
+    .pub-visual { width: 100%; height: 180px; }
+}
+
+/* --- Achievements Page Styles --- */
+
+/* 1. Timeline Container */
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem 0;
+}
+
+/* The Central Line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: #e2e8f0;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    border-radius: 2px;
+}
+
+/* 2. Timeline Item Container */
+.timeline-item {
+    padding: 10px 50px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+/* Positioning Left and Right */
+.timeline-item.left { left: 0; text-align: right; }
+.timeline-item.right { left: 50%; text-align: left; }
+
+/* The Central Dot */
+.timeline-dot {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border: 4px solid var(--primary);
+    border-radius: 50%;
+    top: 24px;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.timeline-item.left .timeline-dot { right: -12px; }
+.timeline-item.right .timeline-dot { left: -12px; }
+
+.timeline-item:hover .timeline-dot {
+    background-color: var(--primary);
+    transform: scale(1.3);
+    box-shadow: 0 0 0 6px rgba(3, 105, 161, 0.2);
+}
+
+/* 3. The Content Card */
+.achieve-card {
+    padding: 1.5rem 2rem;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+.achieve-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.achieve-date {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #f0f9ff;
+    color: var(--primary);
+    font-weight: 700;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+}
+
+.achieve-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+}
+
+.timeline-item.left .achieve-content { align-items: flex-end; }
+.timeline-item.right .achieve-content { align-items: flex-start; }
+
+/* 4. Funding Grid */
+.funding-section {
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.funding-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    align-items: center;
+}
+
+.funding-logo {
+    height: 60px;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.funding-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* Mobile Responsiveness for Timeline */
+@media screen and (max-width: 768px) {
+    .timeline::after { left: 31px; }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    
+    .timeline-item.left, .timeline-item.right {
+        left: 0;
+        text-align: left;
+    }
+    
+    .timeline-item.left .timeline-dot, .timeline-item.right .timeline-dot {
+        left: 19px;
+        right: auto;
+    }
+}
+
+/* --- Research Page Styles --- */
+
+/* 1. The Split Hero Visual */
+.research-split-hero {
+    display: flex;
+    height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 4rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+}
+
+.split-side {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Left Side (Computational) */
+.split-side.comp {
+    background: #0f172a; /* Dark Slate */
+    color: #38bdf8; /* Cyan text */
+    font-family: 'JetBrains Mono', monospace;
+}
+.split-side.comp::after {
+    content: '';
+    position: absolute;
+    top:0; left:0; width:100%; height:100%;
+    /* Subtle code overlay texture */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" fill="rgba(56,189,248,0.1)" font-family="monospace">for i in atoms:</text><text x="30" y="40" fill="rgba(56,189,248,0.1)" font-family="monospace">calc_force(i)</text><text x="10" y="60" fill="rgba(56,189,248,0.1)" font-family="monospace">update_pos(dt)</text></svg>');
+    opacity: 0.5;
+}
+
+/* Right Side (Experimental) */
+.split-side.exp {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    position: relative;
+}
+.split-side.exp img {
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    z-index: 2;
+    /* Subtle floating animation */
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* The Center "Bridge" Icon */
+.split-bridge-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+    z-index: 10;
+    border: 4px solid var(--bg-color);
+    box-shadow: var(--shadow-md);
+}
+
+/* 2. The Narrative Toggle Switch */
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.narrative-toggle {
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+}
+
+.toggle-option {
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    z-index: 2;
+    color: var(--text-muted);
+    transition: color 0.3s;
+    text-align: center;
+    min-width: 150px;
+}
+
+/* The sliding background pill */
+.toggle-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: white;
+    border-radius: 50px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 1;
+}
+
+/* States depending on which is active */
+.narrative-toggle[data-state="story"] .toggle-slider { transform: translateX(0); }
+.narrative-toggle[data-state="science"] .toggle-slider { transform: translateX(100%); }
+
+.narrative-toggle[data-state="story"] .opt-story { color: var(--primary); }
+.narrative-toggle[data-state="science"] .opt-science { color: var(--secondary); }
+
+/* 3. Content Panels (Fading) */
+.panel-container { position: relative; min-height: 600px; /* Ensure height doesn't collapse during fade */ }
+
+.narrative-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    background: white;
+    padding: 3rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.narrative-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative; /* Reset position so it takes up space */
+}
+
+/* Schematics */
+.schematic-img {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.pulse-schematic {
+    animation: subtlePulse 4s infinite ease-in-out;
+}
+@keyframes subtlePulse {
+    0%, 100% { box-shadow: 0 0 0 0px rgba(3, 105, 161, 0.1); }
+    50% { box-shadow: 0 0 20px 10px rgba(3, 105, 161, 0.1); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .research-split-hero { flex-direction: column; height: auto; }
+    .split-side { height: 200px; }
+    .narrative-panel { padding: 1.5rem; }
+}
+
+/* --- News & Updates Page Styles --- */
+
+/* 1. Bento Grid for Featured News */
+.news-hero-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 Left, 1/3 Right */
+    grid-template-rows: repeat(2, 250px);
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+}
+
+/* The Big Main Card */
+.news-card-featured {
+    grid-row: span 2;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    color: white;
+    /* Dark gradient overlay on image */
+    background: linear-gradient(to bottom, rgba(15,23,42,0.1), rgba(15,23,42,0.9)), 
+                url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s ease;
+}
+
+.news-card-featured:hover { transform: scale(1.01); }
+
+/* The Smaller Side Cards */
+.news-card-side {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.news-card-side:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* 2. Editorial List Styles */
+.news-list-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.news-list-item {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+}
+
+.news-date-badge {
+    flex: 0 0 80px;
+    text-align: center;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 0.8rem 0.5rem;
+    border: 1px solid var(--border);
+}
+
+.news-day {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.news-month {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.news-content h3 { margin-bottom: 0.5rem; }
+.news-content p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* 3. Category Tags */
+.cat-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+}
+.cat-paper { background: #dbeafe; color: #1e40af; } /* Blue */
+.cat-event { background: #fce7f3; color: #9d174d; } /* Pink */
+.cat-award { background: #fef3c7; color: #92400e; } /* Amber */
+.cat-tool { background: #dcfce7; color: #166534; } /* Green */
+
+/* 4. Newsletter Box */
+.newsletter-box {
+    background: var(--text-main);
+    color: white;
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    margin-top: 5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoration circle */
+.newsletter-box::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.news-input {
+    flex: 1;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    font-family: inherit;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .news-hero-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 300px auto auto;
+    }
+    .news-card-featured { grid-row: 1; }
+    .news-list-item { flex-direction: column; gap: 1rem; }
+    .newsletter-form { flex-direction: column; }
+}
+
+/* =========================================
+   CONTACT PAGE STYLES
+   ========================================= */
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+/* 1. Left Side: Content */
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* Info Cards (Address/Email) */
+.contact-info-cards {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.info-card {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    padding: 1.2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    background: #f0f9ff;
+    color: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.info-card h4 {
+    margin-bottom: 0.2rem;
+    color: var(--text-main);
+}
+
+.info-card p, .info-card a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+/* Form Styles */
+.contact-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: #f8fafc;
+    transition: all 0.3s;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(3, 105, 161, 0.1);
+}
+
+/* 2. Right Side: Map */
+.map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    min-height: 400px; /* Ensures height on mobile */
+    height: 100%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .map-container {
+        height: 350px;
+    }
+}

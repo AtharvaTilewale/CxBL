@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CxBL | Our Research Story</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div style="width:24px; height:24px; background:var(--primary); border-radius:50%;"></div>
+            CxBL
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html" class="active">Research</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="news.html">News and Updates</a></li>        
+        </ul>
+        <a href="contact.html" class="btn btn-nav">Contact Us</a>
+    </nav>
+
+    <section class="container" style="padding-top: 100px; padding-bottom: 2rem; text-align: center;">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">The Research Narrative</h1>
+        <p style="color:var(--text-muted); max-width: 700px; margin: 0 auto;">
+            We don't just observe biology; we attempt to engineer it. Our approach bridges the gap between digital predictions and physical reality.
+        </p>
+    </section>
+
+    <div class="container">
+        
+        <div class="research-split-hero">
+            <div class="split-side comp">
+                <div style="z-index: 2; text-align: center;">
+                    <i class="fas fa-terminal" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h3>The Blueprint</h3>
+                    <p>In Silico Design</p>
+                </div>
+            </div>
+            <div class="split-bridge-icon">
+                <i class="fas fa-exchange-alt"></i>
+            </div>
+            <div class="split-side exp">
+                <img src="https://via.placeholder.com/400x300/e0f2fe/0369a1?text=Protein+Structure+Visual" alt="Protein Structure">
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2>Choose Your Lens</h2>
+            <p style="color:var(--text-muted);">How would you like to explore our workflow?</p>
+        </div>
+
+        <div class="toggle-container">
+            <div class="narrative-toggle" id="lensToggle" data-state="story">
+                <div class="toggle-slider"></div>
+                <div class="toggle-option opt-story" onclick="setLens('story')">The Story (Simple)</div>
+                <div class="toggle-option opt-science" onclick="setLens('science')">The Science (Expert)</div>
+            </div>
+        </div>
+
+        <div class="panel-container">
+
+            <div class="narrative-panel active" id="panel-story">
+                <h2 style="color:var(--primary);">The Architect & The Builder</h2>
+                <p class="hero-subtitle">Think of developing a new protein like constructing a skyscraper.</p>
+                
+                <div class="grid-3" style="margin-top: 3rem; align-items: center;">
+                    <div>
+                        <h3>1. Drafting the Blueprints</h3>
+                        <p style="color:var(--text-muted);">Before laying a single brick, an architect uses computer software to design the building, testing if it will stand up to wind and earthquakes. In our lab, we use supercomputers to design proteins and simulate how they move and interact.</p>
+                    </div>
+                    <div style="grid-column: span 2;">
+                         <img src="https://via.placeholder.com/800x400/f8fafc/94a3b8?text=SCHEMATIC:+Computer+Model+%E2%86%92+Virtual+Testing" class="schematic-img pulse-schematic" alt="Story Schematic 1">
+                    </div>
+                </div>
+
+                 <div class="grid-3" style="margin-top: 3rem; align-items: center; direction: rtl;">
+                    <div style="direction: ltr;">
+                        <h3>2. Construction & Testing</h3>
+                        <p style="color:var(--text-muted);">Once the blueprints are ready, the builders take over. They pour concrete and assemble beams. We do this in the "wet lab," using bacteria as tiny factories to build the actual proteins we designed on the computer.</p>
+                    </div>
+                    <div style="grid-column: span 2; direction: ltr;">
+                         <img src="https://via.placeholder.com/800x400/f8fafc/94a3b8?text=SCHEMATIC:+Lab+Bench+%E2%86%92+Real+Protein+Testing" class="schematic-img" alt="Story Schematic 2">
+                    </div>
+                </div>
+                 <p style="text-align: center; margin-top: 2rem; font-weight: 600; color: var(--primary);">If the building (protein) doesn't work as planned, we go back to the blueprints and improve the design.</p>
+            </div>
+
+            <div class="narrative-panel" id="panel-science">
+                 <h2 style="color:var(--secondary);">The Iterative Design Cycle</h2>
+                 <p class="hero-subtitle">Integrating High-Performance Computing with Biochemical Validation.</p>
+
+                 <div class="grid-3" style="margin-top: 3rem;">
+                    <div class="card" style="border-top: 4px solid var(--primary);">
+                        <h3><i class="fas fa-microchip"></i> Phase 1: In Silico Design</h3>
+                        <ul style="color:var(--text-muted); padding-left: 1.2rem; margin-top: 1rem;">
+                            <li>Target identification and structure retrieval (PDB/AlphaFold2).</li>
+                            <li>Rational design using Rosetta or machine learning models (e.g., ProteinMPNN).</li>
+                            <li>Molecular Dynamics (MD) simulations (GROMACS, 500ns+) to assess conformational stability and RMSD fluctuations.</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top: 4px solid var(--secondary);">
+                         <h3><i class="fas fa-flask"></i> Phase 2: In Vitro Validation</h3>
+                         <ul style="color:var(--text-muted); padding-left: 1.2rem; margin-top: 1rem;">
+                            <li>Gene synthesis and cloning into expression vectors (e.g., pET-28a).</li>
+                            <li>Recombinant expression in <em>E. coli</em> BL21(DE3).</li>
+                            <li>Protein purification via Ni-NTA affinity chromatography.</li>
+                        </ul>
+                    </div>
+                     <div class="card" style="border-top: 4px solid var(--accent);">
+                         <h3><i class="fas fa-chart-line"></i> Phase 3: Characterization</h3>
+                         <ul style="color:var(--text-muted); padding-left: 1.2rem; margin-top: 1rem;">
+                            <li>Enzyme kinetics determining $K_m$, $k_{cat}$, and catalytic efficiency ($k_{cat}/K_m$).</li>
+                            <li>Thermostability assessment using Circular Dichroism (CD) spectroscopy and DSC.</li>
+                            <li>Data feeds back into computational models for the next design round.</li>
+                        </ul>
+                    </div>
+                 </div>
+
+                 <h3 style="margin-top: 3rem; text-align: center;">Integrated Workflow Schematic</h3>
+                 <img src="https://via.placeholder.com/1000x500/ffffff/475569?text=TECHNICAL+SCHEMATIC:+MD+Sim+%E2%96%B6+Cloning+%E2%96%B6+Kinetics+Plot" class="schematic-img" style="border-color: var(--secondary);" alt="Technical Schematic">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer style="margin-top: 5rem; background: white; border-top: 1px solid var(--border); padding: 3rem 0; text-align: center; color: var(--text-muted);">
+        <p>&copy; 2025 CxBL Lab. University Science Block.</p>
+    </footer>
+
+    <script>
+        function setLens(mode) {
+            // 1. Update Toggle Visual State
+            const toggleBtn = document.getElementById('lensToggle');
+            toggleBtn.setAttribute('data-state', mode);
+
+            // 2. Switch Panels
+            const storyPanel = document.getElementById('panel-story');
+            const sciencePanel = document.getElementById('panel-science');
+
+            if (mode === 'story') {
+                sciencePanel.classList.remove('active');
+                // Small delay to allow fade out before fade in
+                setTimeout(() => {
+                    storyPanel.classList.add('active');
+                }, 200);
+            } else {
+                storyPanel.classList.remove('active');
+                setTimeout(() => {
+                    sciencePanel.classList.add('active');
+                }, 200);
+            }
+        }
+    </script>
+
+</body>
+</html>

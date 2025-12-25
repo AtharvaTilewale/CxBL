@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CxBL | Software</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div style="width:24px; height:24px; background:var(--primary); border-radius:50%;"></div>
+            CxBL
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="tools.html" class="active">Tools</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="news.html">News and Updates</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn-nav">Contact Us</a>
+    </nav>
+
+    <section class="container" style="padding-top: 100px; padding-bottom: 2rem; text-align: center;">
+        <h1 style="font-size: 3rem; margin-bottom: 1rem;">Open Source. Open Science.</h1>
+        <p style="color:var(--text-muted); max-width: 600px; margin: 0 auto;">
+            We build and maintain software to accelerate biomolecular research. All our tools are free for academic use.
+        </p>
+    </section>
+
+    <div class="container">
+        
+        <div class="spotlight-card">
+            <div class="spotlight-content">
+                <span style="color:#38bdf8; font-weight:700; letter-spacing:1px; font-size:0.9rem;">FEATURED PROJECT</span>
+                <h2 style="font-size: 2.5rem; margin: 0.5rem 0 1rem 0;">Boltz2-Notebook</h2>
+                <p style="color: #94a3b8; margin-bottom: 2rem; line-height: 1.7;">
+                    An interactive Google Colab notebook for the Boltz-1 biomolecular foundation model. Predict protein structures, complexes, and small molecule interactions directly in your browser without local GPU requirements.
+                </p>
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+                    <a href="#" class="btn btn-primary" style="background:#38bdf8; color:#0f172a;">Launch in Colab</a>
+                    <a href="#" class="btn btn-outline" style="border-color:rgba(255,255,255,0.2); color:white;">View GitHub</a>
+                </div>
+            </div>
+            <div class="spotlight-visual">
+                <div style="text-align:left; padding:1rem;">
+                    <div style="color:#a5b6cf;">import boltz</div>
+                    <div style="color:#c77dff;">model = boltz.load("v2")</div>
+                    <div style="color:#38bdf8;">pred = model.predict(seq)</div>
+                    <div style="color:#2dd4bf; margin-top:10px;"># Prediction Complete...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterTools('all')">All Tools</button>
+            <button class="filter-btn" onclick="filterTools('md')">MD Simulations</button>
+            <button class="filter-btn" onclick="filterTools('docking')">Docking</button>
+            <button class="filter-btn" onclick="filterTools('viz')">Visualization</button>
+        </div>
+
+        <div class="tech-grid" id="tools-grid">
+
+            <div class="tech-card" data-category="viz">
+                <div class="tech-header">
+                    <div class="tech-icon"><i class="fas fa-chart-area"></i></div>
+                    <span class="lang-badge lang-python">Python</span>
+                </div>
+                <h3>FEL Builder</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.5rem;">
+                    Construct Free Energy Landscapes (FEL) from GROMACS trajectory data with automated plotting and local minima detection.
+                </p>
+                <div class="cmd-block" onclick="copyCmd(this, 'pip install cxbl-fel')">
+                    <span class="cmd-text">pip install cxbl-fel</span>
+                    <i class="far fa-copy copy-icon"></i>
+                </div>
+            </div>
+
+            <div class="tech-card" data-category="docking">
+                <div class="tech-header">
+                    <div class="tech-icon"><i class="fas fa-desktop"></i></div>
+                    <span class="lang-badge lang-web">Web App</span>
+                </div>
+                <h3>UniDock GUI</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.5rem;">
+                    A user-friendly Flask interface for UniDock, enabling high-throughput virtual screening management.
+                </p>
+                <div class="cmd-block" onclick="copyCmd(this, 'git clone https://github.com/cxbl/unidock-gui')">
+                    <span class="cmd-text">git clone cxbl/unidock-gui</span>
+                    <i class="far fa-copy copy-icon"></i>
+                </div>
+            </div>
+
+            <div class="tech-card" data-category="md">
+                <div class="tech-header">
+                    <div class="tech-icon"><i class="fas fa-network-wired"></i></div>
+                    <span class="lang-badge lang-python">Python</span>
+                </div>
+                <h3>GRAVITy</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.5rem;">
+                    Graph-based Residue Analysis and Visualization tool for Interaction Topology in dynamic systems.
+                </p>
+                <div class="cmd-block" onclick="copyCmd(this, 'pip install gravity-md')">
+                    <span class="cmd-text">pip install gravity-md</span>
+                    <i class="far fa-copy copy-icon"></i>
+                </div>
+            </div>
+
+            <div class="tech-card" data-category="viz">
+                <div class="tech-header">
+                    <div class="tech-icon"><i class="fas fa-eye"></i></div>
+                    <span class="lang-badge lang-python">PyMOL</span>
+                </div>
+                <h3>PyMOL Scripts</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.5rem;">
+                    A collection of scripts for high-quality publication rendering and automated movie generation.
+                </p>
+                <div class="cmd-block" onclick="copyCmd(this, 'git clone https://github.com/cxbl/pymol-scripts')">
+                    <span class="cmd-text">git clone cxbl/pymol-scripts</span>
+                    <i class="far fa-copy copy-icon"></i>
+                </div>
+            </div>
+
+             <div class="tech-card" data-category="docking">
+                <div class="tech-header">
+                    <div class="tech-icon"><i class="fas fa-project-diagram"></i></div>
+                    <span class="lang-badge lang-shell">Bash</span>
+                </div>
+                <h3>VS-Pipeline</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.5rem;">
+                    Automated shell pipeline for preparing ligand libraries and running AutoDock Vina on clusters.
+                </p>
+                <div class="cmd-block" onclick="copyCmd(this, 'wget cxbl.org/scripts/vs-pipe.sh')">
+                    <span class="cmd-text">wget vs-pipe.sh</span>
+                    <i class="far fa-copy copy-icon"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer style="margin-top: 5rem;">
+        <p>&copy; 2025 CxBL Lab. Gujarat Biotechnology University.</p>
+    </footer>
+
+    <script>
+        // 1. Filtering Logic
+        function filterTools(category) {
+            const cards = document.querySelectorAll('.tech-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update Active Button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter Cards
+            cards.forEach(card => {
+                card.classList.remove('animate-in'); // Reset animation
+                void card.offsetWidth; // Trigger Reflow
+                
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                    card.classList.add('animate-in');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 2. Copy to Clipboard Logic
+        function copyCmd(element, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const icon = element.querySelector('i');
+                const originalClass = icon.className;
+                
+                // Visual feedback
+                icon.className = 'fas fa-check';
+                icon.style.color = '#4ade80'; // Green
+                element.style.borderColor = '#4ade80';
+
+                setTimeout(() => {
+                    icon.className = 'far fa-copy';
+                    icon.style.color = '#94a3b8';
+                    element.style.borderColor = '#334155';
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
