@@ -30,11 +30,12 @@ body {
 
 /* --- Navigation --- */
 /* --- Navigation (Updated for Scroll Effect) --- */
+/* --- Navigation (Updated for Scroll Effect) --- */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque */
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -43,11 +44,20 @@ nav {
     padding: 1rem 5%;
     z-index: 1000;
     
-    /* NEW: Hide initially */
-    transform: translateY(-100%);
+    /* DEFAULT: Visible (for all other pages) */
+    transform: translateY(0); 
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* HOME PAGE ONLY: Hide initially */
+body.home-page nav {
+    transform: translateY(-100%);
+}
+
+/* HOME PAGE ONLY: Reveal when scrolled (JS adds this class) */
+body.home-page nav.nav-visible {
+    transform: translateY(0);
+}
 /* Class to reveal nav */
 nav.nav-visible {
     transform: translateY(0);

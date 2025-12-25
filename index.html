@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="home-page">
 
     <nav>
         <div class="logo">
@@ -160,181 +160,251 @@
         <p>&copy; 2025 CxBL Lab. Gujarat Biotechnology University.</p>
     </footer>
 <script>
-        // --- 1. NAVIGATION SCROLL LOGIC ---
-        const nav = document.querySelector('nav');
-        const heroSection = document.querySelector('.hero-fullscreen');
+    // --- 1. NAVIGATION SCROLL LOGIC ---
+    const nav = document.querySelector('nav');
+    const heroSection = document.querySelector('.hero-fullscreen');
 
-        function handleScroll() {
-            // Calculate where the hero section ends
-            const heroBottom = heroSection.offsetHeight - 100; // 100px buffer
+    function handleScroll() {
+        // Calculate where the hero section ends
+        const heroBottom = heroSection.offsetHeight - 100; // 100px buffer
+        
+        if (window.scrollY > heroBottom) {
+            nav.classList.add('nav-visible');
+        } else {
+            nav.classList.remove('nav-visible');
+        }
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+
+
+    // --- 2. ANIMATION LOGIC ---
+    const cComp = document.getElementById('canvas-comp');
+    const ctxComp = cComp.getContext('2d');
+    const cExp = document.getElementById('canvas-exp');
+    const ctxExp = cExp.getContext('2d');
+    const canvasDNA = document.getElementById('dna-canvas');
+    const ctxDNA = canvasDNA.getContext('2d');
+
+    let wComp, hComp, wExp, hExp, wDNA, hDNA;
+    
+    const fontSize = 16; 
+    
+    // COMPUTATIONAL TERMS (Matrix Rain)
+    const matrixChars = ['Simulation', 'GROMACS', 'Metagenomics', 'PyMol', 'Python', 'Dynamics', 
+                        'Schrodinger', 'FastQC', 'BLAST', 'AMBER', 'RoseTTA', 'AlphaFold', 
+                        'Boltz2', 'BoltzGen', 'RFDiffusion', 'Pipeline', 'Docking',
+                            'Modelling', 'Colab', 'Jupyter', 'NumPy', 'Pandas', 'AI', 'ML', 'Deep Learning',
+    ];
+    
+    // EXPERIMENTAL TERMS (Floating Bubbles)
+    const expTerms = [
+        'PCR', 'Western Blot', 'Cloning', 'Ni-NTA', 
+        'FPLC', 'Transformation', 'SDS-PAGE',
+        'X-Ray Cryst', 'DNA Extraction', 'Gel Electrophoresis',
+        'SDM', 'Protein Exp', 'Enzyme Assay', 'Enzyme Kinetics'
+    ];
+
+    let drops = [], dropChars = [], bubbles = [], particles = [];
+    let time = 0;
+
+    const dnaConfig = { basePairs: 150, speed: 0.02, amplitude: 70, frequency: 0.15, tilt: 0.15};
+
+    // --- LEFT SIDE: MATRIX RAIN ---
+    function initMatrix() {
+        const columns = Math.ceil(wComp / (fontSize * 2));
+        drops = []; dropChars = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = Math.random() * hComp; 
+            dropChars[x] = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        }
+    }
+    function drawMatrix() {
+        ctxComp.fillStyle = 'rgb(67, 56, 120)'; ctxComp.fillRect(0, 0, wComp, hComp);
+        ctxComp.font = fontSize + 'px monospace';
+        for (let i = 0; i < drops.length; i++) {
+            const text = dropChars[i];
+            if (text === '0' || text === '1') ctxComp.fillStyle = 'rgba(148, 163, 184, 0.3)';
+            else if (['A','T','G','C'].includes(text)) ctxComp.fillStyle = 'rgba(56, 189, 248, 0.3)';
+            else ctxComp.fillStyle = 'rgba(255, 255, 255, 0.2)';
             
-            if (window.scrollY > heroBottom) {
-                nav.classList.add('nav-visible');
+            ctxComp.fillText(text, i * (fontSize * 4), drops[i]); 
+            
+            if (drops[i] > hComp && Math.random() > 0.98) {
+                drops[i] = 0;
+                dropChars[i] = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+            }
+            drops[i] += 2; 
+        }
+    }
+
+    // --- RIGHT SIDE: MIXED BUBBLES (TEXT + EMPTY) ---
+    class Bubble {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * wExp;
+            this.y = hExp + Math.random() * 700; 
+            
+            // 50% chance to be an Empty "Filler" Bubble
+            this.isEmpty = Math.random() > 0.5;
+
+            if (this.isEmpty) {
+                // SMALLER & FASTER (Filler)
+                this.size = Math.random() * 10 + 5; // 5px - 15px radius
+                this.speed = Math.random() * 1.5 + 0.7; // Faster
+                this.text = null;
             } else {
-                nav.classList.remove('nav-visible');
+                // LARGER & SLOWER (Text Container)
+                this.size = Math.random() * 15 + 30; // 30px - 45px radius
+                this.speed = Math.random() * 0.8 + 0.4; // Slower for reading
+                this.text = expTerms[Math.floor(Math.random() * expTerms.length)];
+            }
+
+            this.color = `rgba(124, 58, 237, ${Math.random() * 0.15 + 0.02})`; 
+            this.borderColor = `rgba(124, 58, 237, 0.05)`;
+            this.isHex = Math.random() > 0.7; // 40% chance of Hexagon
+
+            this.isHollow = false;
+            if (this.isEmpty && this.isHex && Math.random() > 0.6) {
+                this.isHollow = true;
+                this.color = `rgba(124, 58, 237, 0)`;
+                this.borderColor = `rgba(124, 58, 237, 0.3)`; // Slightly stronger border
             }
         }
-        
-        window.addEventListener('scroll', handleScroll);
-
-
-        // --- 2. EXISTING ANIMATION LOGIC (Merged) ---
-        const cComp = document.getElementById('canvas-comp');
-        const ctxComp = cComp.getContext('2d');
-        const cExp = document.getElementById('canvas-exp');
-        const ctxExp = cExp.getContext('2d');
-        const canvasDNA = document.getElementById('dna-canvas');
-        const ctxDNA = canvasDNA.getContext('2d');
-
-        let wComp, hComp, wExp, hExp, wDNA, hDNA;
-        
-        const fontSize = 14; 
-        const matrixChars = ['0', '1', 'A', 'T', 'G', 'C', 'MET', 'LYS', 'ARG', 'HIS', 'TRP'];
-        let drops = [], dropChars = [], bubbles = [], particles = [];
-        let time = 0;
-
-        const dnaConfig = { basePairs: 150, speed: 0.02, amplitude: 70, frequency: 0.15, tilt: 0.15};
-
-        // ... (Keep your existing initMatrix, drawMatrix, Bubble class, initBubbles, drawBubbles, Particle class, initDNA, drawDNA functions EXACTLY as they were in the previous step) ...
-        
-        // RE-INSERTING THE FUNCTIONS FOR COMPLETENESS:
-        function initMatrix() {
-            const columns = Math.ceil(wComp / (fontSize * 2));
-            drops = []; dropChars = [];
-            for (let x = 0; x < columns; x++) {
-                drops[x] = Math.random() * hComp; 
-                dropChars[x] = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-            }
+        update() {
+            this.y -= this.speed;
+            this.x += Math.sin(this.y * 0.015) * 0.5; 
+            if(this.y < -50) this.reset();
         }
-        function drawMatrix() {
-            ctxComp.fillStyle = 'rgb(67, 56, 120)'; ctxComp.fillRect(0, 0, wComp, hComp);
-            ctxComp.font = fontSize + 'px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                const text = dropChars[i];
-                if (text === '0' || text === '1') ctxComp.fillStyle = 'rgba(148, 163, 184, 0.3)';
-                else if (['A','T','G','C'].includes(text)) ctxComp.fillStyle = 'rgba(56, 189, 248, 0.3)';
-                else ctxComp.fillStyle = 'rgba(255, 255, 255, 0.3)';
-                ctxComp.fillText(text, i * (fontSize * 2), drops[i]);
-                if (drops[i] > hComp && Math.random() > 0.98) {
-                    drops[i] = 0;
-                    dropChars[i] = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        draw() {
+            ctxExp.beginPath();
+            
+            // Draw Shape (Hexagon or Circle)
+            if (this.isHex) {
+                for (let i = 0; i < 6; i++) {
+                    const angle = 2 * Math.PI / 6 * i;
+                    const x_i = this.x + this.size * Math.cos(angle);
+                    const y_i = this.y + this.size * Math.sin(angle);
+                    if (i === 0) ctxExp.moveTo(x_i, y_i);
+                    else ctxExp.lineTo(x_i, y_i);
                 }
-                drops[i] += 1.5; 
+                ctxExp.closePath();
+            } else {
+                ctxExp.arc(this.x, this.y, this.size, 0, Math.PI*2);
             }
-        }
 
-        class Bubble {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * wExp;
-                this.y = hExp + Math.random() * 100;
-                this.size = Math.random() * 10 + 2; 
-                this.speed = Math.random() * 1 + 0.5;
-                this.color = `rgba(124, 58, 237, ${Math.random() * 0.2 + 0.1})`; 
-                this.isHex = Math.random() > 0.7; 
-            }
-            update() {
-                this.y -= this.speed;
-                this.x += Math.sin(this.y * 0.02) * 0.5; 
-                if(this.y < -20) this.reset();
-            }
-            draw() {
-                ctxExp.beginPath();
-                if (this.isHex) {
-                    const s = this.size;
-                    ctxExp.moveTo(this.x + s * Math.cos(0), this.y + s * Math.sin(0));
-                    for (let i = 1; i <= 6; i += 1) ctxExp.lineTo(this.x + s * Math.cos(i * 2 * Math.PI / 6), this.y + s * Math.sin(i * 2 * Math.PI / 6));
-                    ctxExp.strokeStyle = this.color; ctxExp.lineWidth = 2; ctxExp.stroke();
-                } else {
-                    ctxExp.arc(this.x, this.y, this.size, 0, Math.PI*2);
-                    ctxExp.fillStyle = this.color; ctxExp.fill();
-                }
-            }
-        }
-        function initBubbles() { bubbles = []; for(let i=0; i<40; i++) bubbles.push(new Bubble()); }
-        function drawBubbles() { ctxExp.clearRect(0, 0, wExp, hExp); bubbles.forEach(b => { b.update(); b.draw(); }); }
+            // Fill
+            ctxExp.fillStyle = this.color;
+            ctxExp.fill();
+            ctxExp.strokeStyle = this.borderColor;
+            ctxExp.lineWidth = 1;
+            ctxExp.stroke();
 
-        class Particle {
-            constructor(x, y, type, index) {
-                this.xBase = x; this.yBase = y; this.type = type; this.index = index; this.size = 0; this.alpha = 0;
-            }
-            update() {
-                const phase = this.type === 0 ? 0 : Math.PI; 
-                const offset = (this.index * dnaConfig.frequency) + time + phase;
-                const depth = Math.cos(offset); 
-                const yOffset = Math.sin(offset) * dnaConfig.amplitude;
-                const tiltOffset = this.index * 10 * dnaConfig.tilt;
-                this.currentX = this.xBase; this.currentY = this.yBase + yOffset + tiltOffset;
-                this.size = 3 + (depth * 1.5); this.alpha = 0.3 + ((depth + 1) / 2) * 0.7; this.depth = depth; 
-            }
-            draw() {
-                ctxDNA.beginPath(); ctxDNA.arc(this.currentX, this.currentY, this.size, 0, Math.PI * 2);
-                const isLeftSide = this.currentX < wDNA / 2;
-                if (isLeftSide) {
-                    if (this.type === 0) ctxDNA.fillStyle = `rgb(251 205 251)`; 
-                    else ctxDNA.fillStyle = `rgb(154 136 237)`; 
-                } else {
-                    if (this.type === 0) ctxDNA.fillStyle = `rgba(3, 105, 161, ${this.alpha})`; 
-                    else ctxDNA.fillStyle = `rgba(124, 58, 237, ${this.alpha})`; 
-                }
-                ctxDNA.fill();
+            // Draw Text ONLY if not empty
+            if (!this.isEmpty && this.text) {
+                ctxExp.fillStyle = 'rgba(100, 50, 160, 0.3)'; 
+                ctxExp.font = '600 12px "Outfit", sans-serif'; 
+                ctxExp.textAlign = 'center';
+                ctxExp.textBaseline = 'middle';
+                ctxExp.fillText(this.text, this.x, this.y);
             }
         }
-        function initDNA() {
-            particles = []; const startX = -100; const endX = wDNA + 100; const step = (endX - startX) / dnaConfig.basePairs;
-            for (let i = 0; i < dnaConfig.basePairs; i++) {
-                const x = startX + (i * step); const y = (hDNA / 2) - 100;
-                particles.push(new Particle(x, y, 0, i)); particles.push(new Particle(x, y, 1, i));
-            }
-        }
-        function drawDNA() {
-            ctxDNA.clearRect(0, 0, wDNA, hDNA); time += dnaConfig.speed;
-            particles.forEach(p => p.update());
-            for (let i = 0; i < particles.length; i += 2) {
-                const p1 = particles[i]; const p2 = particles[i+1]; 
-                ctxDNA.beginPath(); ctxDNA.moveTo(p1.currentX, p1.currentY); ctxDNA.lineTo(p2.currentX, p2.currentY);
-                const depthAvg = (p1.depth + p2.depth) / 2;
-                const midX = (p1.currentX + p2.currentX) / 2;
-                const isLeft = midX < wDNA / 2;
-                const lineAlpha = 0.1 + ((depthAvg + 1) / 2) * 0.2;
-                if (isLeft) ctxDNA.strokeStyle = `rgba(203, 213, 225, ${lineAlpha})`; 
-                else ctxDNA.strokeStyle = `rgba(71, 85, 105, ${lineAlpha})`;
-                ctxDNA.lineWidth = 1; ctxDNA.stroke();
-            }
-            particles.forEach(p => p.draw());
-        }
+    }
 
-        function resizeAll() {
-            wComp = cComp.width = window.innerWidth / 2; hComp = cComp.height = window.innerHeight;
-            wExp = cExp.width = window.innerWidth / 2; hExp = cExp.height = window.innerHeight;
-            wDNA = canvasDNA.width = window.innerWidth; hDNA = canvasDNA.height = window.innerHeight;
-            initMatrix(); initBubbles(); initDNA();
-        }
-        function animateMaster() { drawMatrix(); drawBubbles(); drawDNA(); requestAnimationFrame(animateMaster); }
-        
-        // Laptop HUD Logic
-        const seqElement = document.getElementById('seq-counter');
-        const seqFill = document.getElementById('seq-fill');
-        let seqValue = 0; const targetSeq = 98.4;
-        function animateSeq() {
-            if (seqValue < targetSeq) {
-                const diff = targetSeq - seqValue; seqValue += diff * 0.05; 
-                if (seqValue > targetSeq - 0.1) seqValue = targetSeq;
-                if(seqElement) { seqElement.innerText = seqValue.toFixed(1) + '%'; seqFill.style.width = seqValue + '%'; }
-                requestAnimationFrame(animateSeq);
-            }
-        }
-        const rmsdElement = document.getElementById('rmsd-counter');
-        setInterval(() => {
-            if(rmsdElement) {
-                const randomRMSD = (Math.random() * (0.160 - 0.130) + 0.130).toFixed(3);
-                rmsdElement.innerText = randomRMSD;
-            }
-        }, 1500);
+    function initBubbles() { 
+        bubbles = []; 
+        // Increased count to 45 to fill space with the new small bubbles
+        for(let i=0; i<45; i++) bubbles.push(new Bubble()); 
+    }
+    function drawBubbles() { 
+        ctxExp.clearRect(0, 0, wExp, hExp); 
+        bubbles.forEach(b => { b.update(); b.draw(); }); 
+    }
 
-        window.addEventListener('resize', resizeAll);
-        resizeAll();
-        animateMaster();
-        setTimeout(animateSeq, 500);
-    </script></body>
+    // --- CENTER: DNA ANIMATION ---
+    class Particle {
+        constructor(x, y, type, index) {
+            this.xBase = x; this.yBase = y; this.type = type; this.index = index; this.size = 0; this.alpha = 0;
+        }
+        update() {
+            const phase = this.type === 0 ? 0 : Math.PI; 
+            const offset = (this.index * dnaConfig.frequency) + time + phase;
+            const depth = Math.cos(offset); 
+            const yOffset = Math.sin(offset) * dnaConfig.amplitude;
+            const tiltOffset = this.index * 10 * dnaConfig.tilt;
+            this.currentX = this.xBase; this.currentY = this.yBase + yOffset + tiltOffset;
+            this.size = 3 + (depth * 1.5); this.alpha = 0.3 + ((depth + 1) / 2) * 0.7; this.depth = depth; 
+        }
+        draw() {
+            ctxDNA.beginPath(); ctxDNA.arc(this.currentX, this.currentY, this.size, 0, Math.PI * 2);
+            const isLeftSide = this.currentX < wDNA / 2;
+            if (isLeftSide) {
+                if (this.type === 0) ctxDNA.fillStyle = `rgb(251 205 251)`; 
+                else ctxDNA.fillStyle = `rgb(154 136 237)`; 
+            } else {
+                if (this.type === 0) ctxDNA.fillStyle = `rgba(3, 105, 161, ${this.alpha})`; 
+                else ctxDNA.fillStyle = `rgba(124, 58, 237, ${this.alpha})`; 
+            }
+            ctxDNA.fill();
+        }
+    }
+    function initDNA() {
+        particles = []; const startX = -100; const endX = wDNA + 100; const step = (endX - startX) / dnaConfig.basePairs;
+        for (let i = 0; i < dnaConfig.basePairs; i++) {
+            const x = startX + (i * step); const y = (hDNA / 2) - 100;
+            particles.push(new Particle(x, y, 0, i)); particles.push(new Particle(x, y, 1, i));
+        }
+    }
+    function drawDNA() {
+        ctxDNA.clearRect(0, 0, wDNA, hDNA); time += dnaConfig.speed;
+        particles.forEach(p => p.update());
+        for (let i = 0; i < particles.length; i += 2) {
+            const p1 = particles[i]; const p2 = particles[i+1]; 
+            ctxDNA.beginPath(); ctxDNA.moveTo(p1.currentX, p1.currentY); ctxDNA.lineTo(p2.currentX, p2.currentY);
+            const depthAvg = (p1.depth + p2.depth) / 2;
+            const midX = (p1.currentX + p2.currentX) / 2;
+            const isLeft = midX < wDNA / 2;
+            const lineAlpha = 0.1 + ((depthAvg + 1) / 2) * 0.2;
+            if (isLeft) ctxDNA.strokeStyle = `rgba(203, 213, 225, ${lineAlpha})`; 
+            else ctxDNA.strokeStyle = `rgba(71, 85, 105, ${lineAlpha})`;
+            ctxDNA.lineWidth = 1; ctxDNA.stroke();
+        }
+        particles.forEach(p => p.draw());
+    }
+
+    // --- MASTER CONTROL ---
+    function resizeAll() {
+        wComp = cComp.width = window.innerWidth / 2; hComp = cComp.height = window.innerHeight;
+        wExp = cExp.width = window.innerWidth / 2; hExp = cExp.height = window.innerHeight;
+        wDNA = canvasDNA.width = window.innerWidth; hDNA = canvasDNA.height = window.innerHeight;
+        initMatrix(); initBubbles(); initDNA();
+    }
+    function animateMaster() { drawMatrix(); drawBubbles(); drawDNA(); requestAnimationFrame(animateMaster); }
+    
+    // Laptop HUD Logic
+    const seqElement = document.getElementById('seq-counter');
+    const seqFill = document.getElementById('seq-fill');
+    let seqValue = 0; const targetSeq = 98.4;
+    function animateSeq() {
+        if (seqValue < targetSeq) {
+            const diff = targetSeq - seqValue; seqValue += diff * 0.05; 
+            if (seqValue > targetSeq - 0.1) seqValue = targetSeq;
+            if(seqElement) { seqElement.innerText = seqValue.toFixed(1) + '%'; seqFill.style.width = seqValue + '%'; }
+            requestAnimationFrame(animateSeq);
+        }
+    }
+    const rmsdElement = document.getElementById('rmsd-counter');
+    setInterval(() => {
+        if(rmsdElement) {
+            const randomRMSD = (Math.random() * (0.160 - 0.130) + 0.130).toFixed(3);
+            rmsdElement.innerText = randomRMSD;
+        }
+    }, 1500);
+
+    window.addEventListener('resize', resizeAll);
+    resizeAll();
+    animateMaster();
+    setTimeout(animateSeq, 500);
+</script>
+</body>
 </html>
